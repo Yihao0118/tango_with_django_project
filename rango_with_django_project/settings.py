@@ -9,13 +9,10 @@ https://docs.djangoproject.com/en/2.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
-
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
@@ -24,6 +21,7 @@ SECRET_KEY = '=d(yruv%=^p&m8fma==#4p4kzt639=a7-8m2irzlbekok4r24m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 
 ALLOWED_HOSTS = []
 
@@ -51,11 +49,13 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'rango_with_django_project.urls'
-
+print (TEMPLATE_DIR)
+print (TEMPLATE_DIR)
+print (TEMPLATE_DIR)
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [TEMPLATE_DIR,],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

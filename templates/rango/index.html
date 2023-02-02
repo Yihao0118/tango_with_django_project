@@ -1,19 +1,64 @@
 <!DOCTYPE html>
 {%load staticfiles %}
+
 <html>
+
     <head>
         <title>Rango</title>
     </head>
+
     <body>
-            <h1>Rango says...</h1>
+        <h1>Rango says...</h1>
         <div>
-            hey there partner! <br />
-            <strong>{{ boldmessage }}</strong><br />
+            hey there partner!<br/>
+            <strong>{{ boldmessage }}</strong>
         </div>
+        
         <div>
-            <a href="/rango/about/">About</a><br />
-            <img src="{% static 'images/rango.jpg' %}"
-                alt="Picture of Rango" /> <!-- New line -->
+            <h2>Most Liked Categories</h2>
+        </div>
+
+        <div>
+            {% if categories %}
+                <ul>
+                {% for category in categories %}
+                <li>
+                    <a href="{% url 'rango:show_category' category.slug %}">
+                    {{ category.name }}
+                </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                 <strong>There are no most viewd pages.</strong>
+            {% endif %}
+            </div>
+
+        <div>
+        
+        <div>
+            <h2>Most Viewed Pages</h2>
+        </div>
+        
+        <div>
+            {% if views %}
+                <ul>
+                {% for view in views %}
+                <li>
+                    <a href="{{ view.url }}/">{{ view.title }}</a>  
+                </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                 <strong>There are no most viewd pages.</strong>
+            {% endif %}
+            </div>
+
+        <div>
+        <a href="/rango/about/">About Rango</a><br />
+        <a href="/rango/add_category/">Add a New Category</a><br />
+        <a href="/rango/category/add_page/">Add a New Page</a><br />
+        <img src="{% static "images/rango.jpg" %}"
+             alt="Picture of Rango" />
         </div>
     </body>
 </html>

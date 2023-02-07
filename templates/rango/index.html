@@ -1,16 +1,17 @@
-<!DOCTYPE html>
-{%load staticfiles %}
+{% extends 'rango/base.html' %}
+{% load staticfiles %}
 
-<html>
-
-    <head>
-        <title>Rango</title>
-    </head>
-
-    <body>
+{% block title_block %} 
+	Rango
+{% endblock %} 
+{% block body_block%}
         <h1>Rango says...</h1>
         <div>
-            hey there partner!<br/>
+            {% if user.is_authenticated %}
+                howdy {{ user.username }}!
+            {% else %}
+                hey there partner!
+            {% endif %}
             <strong>{{ boldmessage }}</strong>
         </div>
         
@@ -40,11 +41,11 @@
         </div>
         
         <div>
-            {% if views %}
+            {% if pages %}
                 <ul>
-                {% for view in views %}
+                {% for page in pages %}
                 <li>
-                    <a href="{{ view.url }}/">{{ view.title }}</a>  
+                    <a href="{{ page.url }}/">{{ page.title }}</a>  
                 </li>
                     {% endfor %}
                 </ul>
@@ -52,13 +53,10 @@
                  <strong>There are no most viewd pages.</strong>
             {% endif %}
             </div>
-
-        <div>
-        <a href="/rango/about/">About Rango</a><br />
-        <a href="/rango/add_category/">Add a New Category</a><br />
-        <a href="/rango/category/add_page/">Add a New Page</a><br />
         <img src="{% static "images/rango.jpg" %}"
-             alt="Picture of Rango" />
+             alt="Picture of Rango" width="700px" height="700px"/>
         </div>
-    </body>
-</html>
+        <div>
+            <p>visits: {{ visits }}</p>,
+        </div>
+{%endblock%}

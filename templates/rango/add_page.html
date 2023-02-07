@@ -1,14 +1,13 @@
 {% extends 'rango/base.html' %}
 {% load staticfiles %}
-
 {% block title_block %}
     Rango
 {% endblock %}
 {% block body_block%}
+{%if user.is_authenticated%}
 <h1>Add a page</h1>
 <div>
-    <form id="category_form" method="post" action="/rango/category/{{ category.slug
-    }}/add_page/">
+    <form id="page_form" method="post" action="/rango/category/{{ category.slug }}/add_page/">
         {% csrf_token %}
         {% for hidden in form.hidden_fields %}
             {{ hidden }}
@@ -18,7 +17,14 @@
             {{ field.help_text }}
             {{ field }}
         {% endfor %}
-        <input type="submit"name="submit"value="sumbit" />
+        <input type="submit" name="submit" value="sumbit" />
         </form>
 </div>
+{%else%}
+<div>
+<strong> You haven't login！ please login first!</strong>
+<li><a href="{% url 'rango:register' %}">Sign Up</a></li>
+<li><a href="{% url 'rango:login'%}">Login </a></li>
+</div>
+{%endif%}
 {% endblock%}

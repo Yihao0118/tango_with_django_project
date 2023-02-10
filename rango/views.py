@@ -22,7 +22,6 @@ def index(request):
     context_dict['categories'] = category_list
     context_dict['pages'] = page_list
     visitor_cookie_handler(request)
-    context_dict['visits'] = request.session['visits']
     response = render(request, 'rango/index.html', context=context_dict)
     return response
 
@@ -212,16 +211,12 @@ def visitor_cookie_handler(request):
     str(datetime.now()))
     last_visit_time = datetime.strptime(last_visit_cookie[:-7],
     '%Y-%m-%d %H:%M:%S')
-    # 如果visit
-    if (datetime.now() - last_visit_time).seconds > 0:
-      visits = visits + 1
-    # 增加访问次数后更新“last_visit”cookie
-      request.session['last_visit'] = str(datetime.now())
+    if (datetime.now() - last_visit_time).days > 0:
+        visits +=1
+        request.session['last_visit'] = str(datetime.now())
     else:
-    # 设定“last_visit”cookie
-     request.session['last_visit'] = last_visit_cookie
-    # 更新或设定“visits”cookie
-     request.session['visits'] = visits
+        request.session['last_visit'] = last_visit_cookie
+    request.session['visits'] = visits
 def get_server_side_cookie(request, cookie, default_val=None):
     val = request.session.get(cookie)
     if not val:

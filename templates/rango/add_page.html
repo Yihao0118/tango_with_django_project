@@ -4,7 +4,6 @@
     Rango
 {% endblock %}
 {% block body_block%}
-{%if user.is_authenticated%}
 <h1>Add a page</h1>
 <div>
     <form id="page_form" method="post" action="/rango/category/{{ category.slug }}/add_page/">
@@ -20,11 +19,8 @@
         <input type="submit" name="submit" value="sumbit" />
         </form>
 </div>
-{%else%}
 <div>
-<strong> You haven't login！ please login first!</strong>
 <li><a href="{% url 'rango:register' %}">Sign Up</a></li>
 <li><a href="{% url 'rango:login'%}">Login </a></li>
 </div>
-{%endif%}
 {% endblock%}

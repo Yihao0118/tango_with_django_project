@@ -16,7 +16,7 @@ def populate():
         'views': 64},
         {'title':'Learn Python in 10 Minutes',
         'url':'http://www.korokithakis.net/tutorials/python/',
-        'views': 32} ]
+        'views': 16} ]
 
     django_pages = [
         {'title':'Official Django Tutorial',
@@ -37,9 +37,9 @@ def populate():
         'url':'http://flask.pocoo.org',
         'views': 64} ]
 
-    cats = {'Python': {'pages': python_pages, 'views': 128, 'likes': 64},
-            'Django': {'pages': django_pages, 'views': 64, 'likes': 32},
-            'Other Frameworks': {'pages': other_pages, 'views': 32, 'likes': 16} }
+    cats = {'Python': {'pages': python_pages, 'views': 208, 'likes': 64},
+            'Django': {'pages': django_pages, 'views': 224, 'likes': 32},
+            'Other Frameworks': {'pages': other_pages, 'views': 192, 'likes': 16} }
 
     for cat, cat_data in cats.items():
         c = add_cat(cat, cat_data['views'], cat_data['likes'])

@@ -9,7 +9,11 @@
 {% block body_block %}
         <h1>Rango says...</h1>
         <div>
-            hey there partner! <br />
+            {% if user.is_authenticated %}
+                howdy {{ user.username }}!
+            {% else %}
+                hey there partner!
+            {% endif %}
         <h2> Most Liked Categories</h2>
         </div>
 
@@ -17,10 +21,12 @@
             {% if categories %}
                 <ul>
                     {% for category in categories %}
-                    <li>
-                        <a href="{{ category.url }}">{{ category.name }}</a>
-                    </li>  
-                    {%endfor%}
+                        <li>
+                        <a href="{% url 'rango:show_category' category.slug %}">
+                        {{ category.name }}
+                        </a>
+                        </li>
+                    {% endfor %}
                 </ul>
             {% else %}
                 <strong>There are no cat pictures present.</strong>
